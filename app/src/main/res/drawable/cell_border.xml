@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white"/>
+    <stroke
+        android:width="2dp"
+        android:color="@color/material_blue" /> <!-- Màu viền tím đậm, phù hợp với nút đăng nhập -->
+    <corners android:radius="40dp" /> <!-- Bo góc nhẹ -->
+    <padding
+        android:left="12dp"
+        android:right="12dp"
+        android:top="8dp"
+        android:bottom="8dp" /> <!-- Khoảng cách bên trong -->
+</shape>
