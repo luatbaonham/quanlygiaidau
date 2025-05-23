@@ -9,55 +9,67 @@
     app:cardElevation="4dp"
     app:cardBackgroundColor="#FFFFFF">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:weightSum="3"
-        android:background="@drawable/gradient_bg"
-        android:padding="8dp">
+        android:layout_height="145dp">
 
-        <!-- Team 1 -->
+        <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_kq" />
+
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="3"
+            android:padding="8dp">
 
-            <ImageView
-                android:id="@+id/iv_team1"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/arsenal"
-                android:scaleType="centerInside" />
-
-            <TextView
-                android:id="@+id/tv_team1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Arsenal"
-                android:textColor="#1A1A1A"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginTop="8dp" />
-        </LinearLayout>
-
-        <!-- Score -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
+            <!-- Team 1 -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
                 android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iv_team1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/arsenal"
+                    android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/tv_team1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Arsenal"
+                    android:textColor="#1A1A1A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Score -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_tengiai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tên giải đấu"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#1A1A1A"
+                    android:gravity="center" />
                 <TextView
                     android:id="@+id/tv_score"
                     android:layout_width="wrap_content"
@@ -67,46 +79,46 @@
                     android:textStyle="bold"
                     android:textColor="#1A1A1A"
                     android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="20:00 - 12/05/2023"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="20:00 - 12/05/2023"
-                android:textColor="#666666"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginTop="8dp" />
+            <!-- Team 2 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iv_team2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/real"
+                    android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/tv_team2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Real Đần"
+                    android:textColor="#1A1A1A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
         </LinearLayout>
-
-        <!-- Team 2 -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/iv_team2"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/real"
-                android:scaleType="centerInside" />
-
-            <TextView
-                android:id="@+id/tv_team2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Real Đần"
-                android:textColor="#1A1A1A"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginTop="8dp" />
-        </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 
 </androidx.cardview.widget.CardView>

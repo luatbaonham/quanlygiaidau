@@ -11,9 +11,9 @@
     <item
         android:id="@+id/nav_results"
         android:icon="@drawable/cup"
-        android:title="Kết quả"/>
+        android:title="Kết quả trận đấu"/>
     <item
         android:id="@+id/nav_cau_thu_noi_bat"
         android:icon="@drawable/user"
-        android:title="hihi"/>
+        android:title="Câu lạc bộ"/>
 </menu>

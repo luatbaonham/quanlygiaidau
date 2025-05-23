@@ -1,0 +1,23 @@
+# Android Studio files
+.idea/
+*.iml
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file
+local.properties
+
+# Build output
+/captures/
+.externalNativeBuild/
+.cxx/
+
+# macOS files
+.DS_Store
+
+# Generated files
+*.apk
+*.ap_
+*.aab
