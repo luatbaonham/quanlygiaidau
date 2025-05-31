@@ -21,3 +21,7 @@ local.properties
 *.apk
 *.ap_
 *.aab
+
+# JVM crash logs
+hs_err_pid*.log
+replay_pid*.log

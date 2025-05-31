@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fe_quanlygiaidau.R;
-import com.example.fe_quanlygiaidau.joindatabase.Item_hienthi_cauthu;
+import com.example.fe_quanlygiaidau.dto.Item_hienthi_cauthu;
 
 import java.util.List;
 
@@ -46,12 +46,12 @@ public class CauThuAdapter extends RecyclerView.Adapter<CauThuAdapter.ViewHolder
         String baseUrl = "https://res.cloudinary.com/dyilzwziv/image/upload/";
         String anhcauthu = dscauthu.getHinhAnh();
         String fullImageUrl1 = baseUrl + anhcauthu;
-//        Glide.with(context)
-//                .load(fullImageUrl1)
-//                .placeholder(R.drawable.chan_dung_rice)
-//                .error(R.drawable.real)
-//                .into(holder.Image_cauthu);
-        holder.Image_cauthu.setImageResource(R.drawable.chan_dung_rice);
+        Glide.with(context)
+                .load(fullImageUrl1)
+                .placeholder(R.drawable.chan_dung_rice)
+                .error(R.drawable.real)
+                .into(holder.Image_cauthu);
+//        holder.Image_cauthu.setImageResource(R.drawable.chan_dung_rice);
         holder.tenCauthu.setText(dscauthu.getTenCauThu());
         String soAo = " Số áo: " + dscauthu.getSoAo();
         holder.soAo.setText(String.valueOf(soAo));

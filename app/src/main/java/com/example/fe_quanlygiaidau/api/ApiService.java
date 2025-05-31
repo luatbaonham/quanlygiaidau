@@ -1,15 +1,17 @@
 package com.example.fe_quanlygiaidau.api;
 
 import com.example.fe_quanlygiaidau.model.BangDau;
-import com.example.fe_quanlygiaidau.model.BangXepHangVongLoai;
 import com.example.fe_quanlygiaidau.model.CauThu;
 import com.example.fe_quanlygiaidau.model.CauThuGiaiDau;
 import com.example.fe_quanlygiaidau.model.DoiBong;
+import com.example.fe_quanlygiaidau.model.DoiBongGiaiDau;
 import com.example.fe_quanlygiaidau.model.Giaidau;
 import com.example.fe_quanlygiaidau.model.KetQuaTranDau;
+import com.example.fe_quanlygiaidau.model.SanVanDong;
 import com.example.fe_quanlygiaidau.model.TranDau;
 import com.example.fe_quanlygiaidau.model.TrongTai;
 import com.example.fe_quanlygiaidau.model.ViTriCauThu;
+import com.example.fe_quanlygiaidau.model.VongDau;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -26,7 +28,7 @@ public interface ApiService {
             .setDateFormat("yyyy-MM-dd")
             .create();
     ApiService apiService = new Retrofit.Builder()
-            .baseUrl("http://192.168.1.22:4002/api/")
+            .baseUrl("http://192.168.110.219:4002/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
@@ -57,7 +59,13 @@ public interface ApiService {
 
     @GET("vi_tri_cau_thu")
     Call<List<ViTriCauThu>> getListViTriCauThu();
+    @GET("doi_bong_giai_dau")
+    Call<List<DoiBongGiaiDau>> getListDoiBongGiaiDau();
 
-    @GET("xep_hang_vong_loai")
-    Call<List<BangXepHangVongLoai>> getListXepHangVongLoai();
+    @GET("san_van_dong")
+    Call<List<SanVanDong>> getListSanVanDong();
+
+    @GET("vong_dau")
+    Call<List<VongDau>> getListVongDau();
+
 }

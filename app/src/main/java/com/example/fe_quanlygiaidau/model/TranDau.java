@@ -2,7 +2,6 @@ package com.example.fe_quanlygiaidau.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class TranDau {
@@ -101,8 +100,6 @@ public class TranDau {
         this.sanVanDong = sanVanDong;
     }
 
-
-
     public String getTrangThai() {
         return trangThai;
     }
@@ -117,5 +114,20 @@ public class TranDau {
 
     public void setMaVongDau(String maVongDau) {
         this.maVongDau = maVongDau;
+    }
+
+    @Override
+    public String toString() {
+        return "TranDau{" +
+                "maTranDau='" + maTranDau + '\'' +
+                ", maGiaiDau='" + maGiaiDau + '\'' +
+                ", maDoi1='" + maDoi1 + '\'' +
+                ", maDoi2='" + maDoi2 + '\'' +
+                ", ngayDienRa=" + ngayDienRa +
+                ", gioDienRa=" + gioDienRa +
+                ", sanVanDong='" + sanVanDong + '\'' +
+                ", trangThai='" + trangThai + '\'' +
+                ", maVongDau='" + maVongDau + '\'' +
+                '}';
     }
 }

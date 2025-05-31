@@ -1,0 +1,120 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tvBangDau"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bảng A"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/gradient_header"
+            android:padding="12dp"
+            android:gravity="center"
+            android:elevation="2dp" />
+
+        <!-- Header của bảng -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#F5F5F5"
+            android:padding="12dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="STT"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Đội"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:paddingStart="12dp" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="Tr"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="T"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="H"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="B"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:gravity="center" />
+
+<!--            <TextView-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="HS"-->
+<!--                android:textSize="13sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#212121"-->
+<!--                android:gravity="center" />-->
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="Đ"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <!-- RecyclerView cho danh sách đội -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvlistDoiBong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:nestedScrollingEnabled="false" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

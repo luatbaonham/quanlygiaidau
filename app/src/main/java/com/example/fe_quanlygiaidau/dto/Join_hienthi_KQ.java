@@ -1,6 +1,7 @@
-package com.example.fe_quanlygiaidau.joindatabase;
+package com.example.fe_quanlygiaidau.dto;
 
 import com.example.fe_quanlygiaidau.model.DoiBong;
+import com.example.fe_quanlygiaidau.model.DoiBongGiaiDau;
 import com.example.fe_quanlygiaidau.model.Giaidau;
 import com.example.fe_quanlygiaidau.model.KetQuaTranDau;
 import com.example.fe_quanlygiaidau.model.TranDau;
@@ -14,7 +15,8 @@ public class Join_hienthi_KQ {
         public List<Item_hienthi_KQ> mapKetQuaNhanh(List<KetQuaTranDau> ketQuas,
                                                     List<TranDau> tranDaus,
                                                     List<DoiBong> doiBongs,
-                                                    List<Giaidau> giaiDaus) {
+                                                    List<Giaidau> giaiDaus,
+                                                    List<DoiBongGiaiDau> doiBongGiaiDaus) {
 
         Map<String, TranDau> mapTranDau = new HashMap<>();
         for (TranDau td : tranDaus) {
@@ -24,6 +26,11 @@ public class Join_hienthi_KQ {
         Map<String, DoiBong> mapDoiBong = new HashMap<>();
         for (DoiBong db : doiBongs) {
             mapDoiBong.put(db.getMaDoiBong(), db);
+        }
+
+        Map<String, DoiBongGiaiDau> mapDoiBongGiaiDau = new HashMap<>();
+        for (DoiBongGiaiDau dbgd : doiBongGiaiDaus) {
+            mapDoiBongGiaiDau.put(dbgd.getMaDoiBong(), dbgd);
         }
 
         Map<String, Giaidau> mapGiaiDau = new HashMap<>();
@@ -39,11 +46,13 @@ public class Join_hienthi_KQ {
                 DoiBong doi1 = mapDoiBong.get(td.getMaDoi1());
                 DoiBong doi2 = mapDoiBong.get(td.getMaDoi2());
                 Giaidau gd = mapGiaiDau.get(td.getMaGiaiDau());
+                DoiBongGiaiDau doiBongGiaiDau1 = mapDoiBongGiaiDau.get(td.getMaDoi1());
+                DoiBongGiaiDau doiBongGiaiDau2 = mapDoiBongGiaiDau.get(td.getMaDoi2());
 
                 if (doi1 != null && doi2 != null) {
                     result.add(new Item_hienthi_KQ(
-                            doi1.getTenDoiBong(),
-                            doi2.getTenDoiBong(),
+                            doiBongGiaiDau1.getTenDoiBong(),
+                            doiBongGiaiDau2.getTenDoiBong(),
                             doi1.getLogo(),
                             doi2.getLogo(),
                             gd.getTenGiaiDau(),

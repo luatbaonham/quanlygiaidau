@@ -3,9 +3,9 @@ package com.example.fe_quanlygiaidau.model;
 import com.google.gson.annotations.SerializedName;
 
 public class VongDau {
-    @SerializedName("ma_vong_dau ")
+    @SerializedName("ma_vong_dau")
     private String maVongDau;
-    @SerializedName("ten_vong ")
+    @SerializedName("ten_vong")
     private String tenVong;
     @SerializedName("mo_ta")
     private String moTa;

@@ -10,11 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fe_quanlygiaidau.R;
-import com.example.fe_quanlygiaidau.joindatabase.Item_hienthi_KQ;
-
 import com.bumptech.glide.Glide;
-import com.example.fe_quanlygiaidau.model.KetQuaTranDau;
+import com.example.fe_quanlygiaidau.R;
+import com.example.fe_quanlygiaidau.dto.Item_hienthi_KQ;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,23 +58,23 @@ public class KetQuaTranDauAdapter extends RecyclerView.Adapter<KetQuaTranDauAdap
         holder.scoreText.setText(tiSo);
 
 
-//        String baseUrl = "https://res.cloudinary.com/dyilzwziv/image/upload/";
-//        String logo1 = ketQuaTranDau.getLogoDoi1(); // "7e238089a2201e9c336d698b96425f53.jpg"
-//        String fullImageUrl1 = baseUrl + logo1;
-//        Glide.with(context)
-//                .load(fullImageUrl1)
-//                .placeholder(R.drawable.arsenal)
-//                .error(R.drawable.real)
-//                .into(holder.team1Image);
-//        String logo2 = ketQuaTranDau.getLogoDoi2(); // "7e238089a2201e9c336d698b96425f53.jpg"
-//        String fullImageUrl2 = baseUrl + logo2;
-//        Glide.with(context)
-//                .load(fullImageUrl2)
-//                .placeholder(R.drawable.real)
-//                .error(R.drawable.arsenal)
-//                .into(holder.team2Image);
-        holder.team1Image.setImageResource(R.drawable.real);
-        holder.team2Image.setImageResource(R.drawable.arsenal);
+        String baseUrl = "https://res.cloudinary.com/dyilzwziv/image/upload/";
+        String logo1 = ketQuaTranDau.getLogoDoi1();
+        String fullImageUrl1 = baseUrl + logo1;
+        Glide.with(context)
+                .load(fullImageUrl1)
+                .placeholder(R.drawable.arsenal)
+                .error(R.drawable.real)
+                .into(holder.team1Image);
+        String logo2 = ketQuaTranDau.getLogoDoi2();
+        String fullImageUrl2 = baseUrl + logo2;
+        Glide.with(context)
+                .load(fullImageUrl2)
+                .placeholder(R.drawable.real)
+                .error(R.drawable.arsenal)
+                .into(holder.team2Image);
+//        holder.team1Image.setImageResource(R.drawable.real);
+//        holder.team2Image.setImageResource(R.drawable.arsenal);
         holder.tenGiaiDau.setText(ketQuaTranDau.getTengiaidau());
 
     }

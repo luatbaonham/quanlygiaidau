@@ -1,6 +1,7 @@
-package com.example.fe_quanlygiaidau.joindatabase;
+package com.example.fe_quanlygiaidau.dto;
 
 import com.example.fe_quanlygiaidau.model.CauThu;
+import com.example.fe_quanlygiaidau.model.CauThuGiaiDau;
 import com.example.fe_quanlygiaidau.model.DoiBong;
 import com.example.fe_quanlygiaidau.model.ViTriCauThu;
 

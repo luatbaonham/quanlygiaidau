@@ -1,4 +1,4 @@
-package com.example.fe_quanlygiaidau.joindatabase;
+package com.example.fe_quanlygiaidau.dto;
 
 import com.google.gson.annotations.SerializedName;
 

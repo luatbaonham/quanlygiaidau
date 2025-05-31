@@ -22,9 +22,9 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new Fragment_trang_chu();
+                return new HomeFragment();
             case 1:
-                return new Fragment_lich_thi_dau();
+                return new GiaiDauFragment();
             case 2:
                 return new Fragment_ket_qua(); // Thay bằng Fragment cho "Quản lý cầu thủ"
             case 3:

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginEnd="8dp"
+    android:background="@drawable/normal_league_background"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/logoGiaiDau"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/circle_background"
+        android:contentDescription="League Icon"
+        android:scaleType="centerInside"
+        android:src="@drawable/logopp" />
+
+    <TextView
+        android:id="@+id/tenGiaiDau"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Premier League"
+        android:textSize="12sp"
+        android:textColor="#333333"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textAlignment="center"
+        android:maxWidth="80dp" />
+
+</LinearLayout>

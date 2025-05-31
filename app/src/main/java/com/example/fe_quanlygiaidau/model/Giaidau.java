@@ -2,9 +2,10 @@ package com.example.fe_quanlygiaidau.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Giaidau {
+public class Giaidau implements Serializable {
     @SerializedName("ma_giai_dau")
     private String maGiaidau;
     @SerializedName("ten_giai_dau")
@@ -23,7 +24,10 @@ public class Giaidau {
     @SerializedName("ten_to_chuc")
     private String tenToChuc;
 
-    public Giaidau(String maGiaidau, String tenGiaiDau, String moTa, Date ngayBatdau, Date ngayKetThuc, Date ngayKetThucDangKy, String gioiTinh, String tenToChuc) {
+    @SerializedName("hinh-anh")
+    private String hinhAnh;
+
+    public Giaidau(String maGiaidau, String tenGiaiDau, String moTa, Date ngayBatdau, Date ngayKetThuc, Date ngayKetThucDangKy, String gioiTinh, String tenToChuc, String hinhAnh) {
         this.maGiaidau = maGiaidau;
         this.tenGiaiDau = tenGiaiDau;
         this.moTa = moTa;
@@ -32,6 +36,15 @@ public class Giaidau {
         this.ngayKetThucDangKy = ngayKetThucDangKy;
         this.gioiTinh = gioiTinh;
         this.tenToChuc = tenToChuc;
+        this.hinhAnh = hinhAnh;
+    }
+
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
     }
 
     public Date getNgayKetThucDangKy() {

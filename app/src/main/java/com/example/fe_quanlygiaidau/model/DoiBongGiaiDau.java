@@ -3,9 +3,9 @@ package com.example.fe_quanlygiaidau.model;
 import com.google.gson.annotations.SerializedName;
 
 public class DoiBongGiaiDau {
-    @SerializedName("ma_doi_bong ")
+    @SerializedName("ma_doi_bong")
     private String maDoiBong;
-    @SerializedName("ma_giai_dau ")
+    @SerializedName("ma_giai_dau")
     private String maGiaiDau;
     @SerializedName("ten_doi_bong")
     private String tenDoiBong;
@@ -13,19 +13,41 @@ public class DoiBongGiaiDau {
     private String logo;
     @SerializedName("quoc_gia")
     private String quocGia;
-    @SerializedName("ma_bang_dau ")
+    @SerializedName("ma_bang_dau")
     private String mabangDau;
     @SerializedName("hat_giong")
     private String hatGiong;
+    @SerializedName("diem_vong_loai")
+    private int diemVongLoai;
+    @SerializedName("ghi_chu")
+    private String ghiChu;
 
-    public DoiBongGiaiDau(String maDoiBong, String maGiaiDau, String tenDoiBong, String logo, String mabangDau, String quocGia, String hatGiong) {
+    public DoiBongGiaiDau(String maDoiBong, String maGiaiDau, String tenDoiBong, String logo, String quocGia, String mabangDau, String hatGiong, int diemVongLoai, String ghiChu) {
         this.maDoiBong = maDoiBong;
         this.maGiaiDau = maGiaiDau;
         this.tenDoiBong = tenDoiBong;
         this.logo = logo;
-        this.mabangDau = mabangDau;
         this.quocGia = quocGia;
+        this.mabangDau = mabangDau;
         this.hatGiong = hatGiong;
+        this.diemVongLoai = diemVongLoai;
+        this.ghiChu = ghiChu;
+    }
+
+    public int getDiemVongLoai() {
+        return diemVongLoai;
+    }
+
+    public void setDiemVongLoai(int diemVongLoai) {
+        this.diemVongLoai = diemVongLoai;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
     }
 
     public String getMaDoiBong() {

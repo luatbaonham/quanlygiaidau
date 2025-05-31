@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fe_quanlygiaidau.R;
 import com.example.fe_quanlygiaidau.adapter.CauThuAdapter;
 import com.example.fe_quanlygiaidau.api.ApiService;
-import com.example.fe_quanlygiaidau.joindatabase.Item_hienthi_cauthu;
-import com.example.fe_quanlygiaidau.joindatabase.Join_hienthi_cauthu;
+import com.example.fe_quanlygiaidau.dto.Item_hienthi_cauthu;
+import com.example.fe_quanlygiaidau.dto.Join_hienthi_cauthu;
 import com.example.fe_quanlygiaidau.model.CauThu;
+import com.example.fe_quanlygiaidau.model.CauThuGiaiDau;
 import com.example.fe_quanlygiaidau.model.DoiBong;
 import com.example.fe_quanlygiaidau.model.ViTriCauThu;
 
@@ -51,75 +52,71 @@ public class ActivityDSCauthu extends AppCompatActivity {
             Toast.makeText(this, "Không có ID đội bóng", Toast.LENGTH_SHORT).show();
         }
     }
-    private void fetchDataAndDisplay() {
-        // Gọi 3 API đồng thời
-        Call<List<CauThu>> call1 = ApiService.apiService.getListCauThu();
-        Call<List<DoiBong>> call2 = ApiService.apiService.getListDoiBong();
-        Call<List<ViTriCauThu>> call3 = ApiService.apiService.getListViTriCauThu();
+    private int totalApiCalls = 3;
+    private int loadedCount = 0;
+    List<CauThu> cauThus;
+    List<DoiBong> doiBongs;
+    List<ViTriCauThu> vitris;
+    List<CauThuGiaiDau> cauThuGiaiDaus;
+    private void   fetchDataAndDisplay(){
+        loadedCount = 0;
 
-        call1.enqueue(new Callback<List<CauThu>>() {
+        ApiService.apiService.getListCauThu().enqueue(new Callback<List<CauThu>>() {
             @Override
-            public void onResponse(Call<List<CauThu>> call, Response<List<CauThu>> response1) {
-                if (response1.isSuccessful() && response1.body() != null) {
-                    List<CauThu> listCauThu = response1.body();
-
-                    call2.enqueue(new Callback<List<DoiBong>>() {
-                        @Override
-                        public void onResponse(Call<List<DoiBong>> call, Response<List<DoiBong>> response2) {
-                            if (response2.isSuccessful() && response2.body() != null) {
-                                List<DoiBong> listDoiBong = response2.body();
-
-                                call3.enqueue(new Callback<List<ViTriCauThu>>() {
-                                    @Override
-                                    public void onResponse(Call<List<ViTriCauThu>> call, Response<List<ViTriCauThu>> response3) {
-                                        if (response3.isSuccessful() && response3.body() != null) {
-                                            List<ViTriCauThu> listViTri = response3.body();
-
-                                            // Join dữ liệu
-                                            Join_hienthi_cauthu joiner = new Join_hienthi_cauthu();
-                                            List<Item_hienthi_cauthu> fullList = joiner.mapCauThuNhanh(listCauThu, listDoiBong, listViTri);
-
-                                            // ✅ Lọc theo mã đội bóng
-                                            List<Item_hienthi_cauthu> filteredList = new ArrayList<>();
-                                            for (Item_hienthi_cauthu item : fullList) {
-                                                if (item.getMaDoiBong().equals(idDoiBong)) {
-                                                    dscauthu.add(item);
-                                                }
-                                            }
-
-                                            // Cập nhật adapter
-                                            adapter.setMatches(dscauthu);
-                                            adapter.notifyDataSetChanged();
-                                        } else {
-                                            Toast.makeText(ActivityDSCauthu.this, "Lỗi lấy danh sách vị trí", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<List<ViTriCauThu>> call, Throwable t) {
-                                        Toast.makeText(ActivityDSCauthu.this, "Lỗi API vị trí: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else {
-                                Toast.makeText(ActivityDSCauthu.this, "Lỗi lấy danh sách đội bóng", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<DoiBong>> call, Throwable t) {
-                            Toast.makeText(ActivityDSCauthu.this, "Lỗi API đội bóng: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else {
-                    Toast.makeText(ActivityDSCauthu.this, "Lỗi lấy danh sách cầu thủ", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<List<CauThu>> call, Response<List<CauThu>> response) {
+                if (response.isSuccessful()) {
+                    cauThus = response.body();
                 }
+                onApiLoaded();
+            }
+            @Override
+            public void onFailure(Call<List<CauThu>> call, Throwable t) {
+                onApiLoaded();
+            }
+        });
+        ApiService.apiService.getListDoiBong().enqueue(new Callback<List<DoiBong>>() {
+            @Override
+            public void onResponse(Call<List<DoiBong>> call, Response<List<DoiBong>> response) {
+                if (response.isSuccessful()) {
+                    doiBongs = response.body();
+                }
+                onApiLoaded();
             }
 
             @Override
-            public void onFailure(Call<List<CauThu>> call, Throwable t) {
-                Toast.makeText(ActivityDSCauthu.this, "Lỗi API cầu thủ: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<DoiBong>> call, Throwable t) {
+                onApiLoaded();
+            }
+        });
+        ApiService.apiService.getListViTriCauThu().enqueue(new Callback<List<ViTriCauThu>>() {
+
+            @Override
+            public void onResponse(Call<List<ViTriCauThu>> call, Response<List<ViTriCauThu>> response) {
+                if (response.isSuccessful()) {
+                    vitris = response.body();
+                }
+                onApiLoaded();
+            }
+            @Override
+            public void onFailure(Call<List<ViTriCauThu>> call, Throwable t) {
+                onApiLoaded();
             }
         });
     }
 
+    private synchronized void onApiLoaded() {
+        loadedCount++;
+        if (loadedCount == totalApiCalls) {
+            if (cauThus != null && doiBongs != null && vitris != null) {
+                Join_hienthi_cauthu joiner = new Join_hienthi_cauthu();
+                List<Item_hienthi_cauthu> dscauthu = joiner.mapCauThuNhanh(
+                        cauThus, doiBongs, vitris
+                );
+                adapter.setMatches(dscauthu);
+                adapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(this, "Lỗi tải dữ liệu!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

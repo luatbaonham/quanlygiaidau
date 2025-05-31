@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/football_app_background"
+    android:layout_height="match_parent"
+    tools:context=".layout.NewsActivity">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        app:srcCompat="@drawable/banner" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/btn_shape_white"
+        android:layout_width="100dp"
+        android:onClick="clickQuayLai"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_left_black"
+        android:text="Quay lại" />
+
+    <TextView
+        android:id="@+id/textViewNewsTitle"
+        android:padding="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="UEFA takes firm stance on unauthorised ticketing ahead of finals" />
+
+
+    <ImageView
+        android:id="@+id/imageViewNewsImg"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:layout_height="250dp"
+        app:srcCompat="@drawable/new3" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/textViewNewsText"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:text="UEFA's Environmental, Social and Governance (ESG) Strategy for the tournament, unveiled in October 2024, was a focal point. Filippo Veglio, UEFA's head of social and environmental sustainability, described it as a plan built on ambition, action and accountability. Structured around UEFA's wider ESG Framework, the strategy is designed to accelerate sustainability efforts, meet growing societal expectations and deliver long-term value. It sets out three overarching goals: reducing environmental impact, respecting and protecting rights and ensuring transparency and accountability. These cascade into 11 areas of action, 27 topics, 47 targets and 91 specific initiatives, covering issues such as smart mobility, accessibility, human rights and stakeholder engagement." />
+    </ScrollView>
+
+</LinearLayout>

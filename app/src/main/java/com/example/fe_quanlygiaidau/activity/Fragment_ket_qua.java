@@ -16,9 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fe_quanlygiaidau.R;
 import com.example.fe_quanlygiaidau.adapter.KetQuaTranDauAdapter;
 import com.example.fe_quanlygiaidau.api.ApiService;
-import com.example.fe_quanlygiaidau.joindatabase.Item_hienthi_KQ;
-import com.example.fe_quanlygiaidau.joindatabase.Join_hienthi_KQ;
+import com.example.fe_quanlygiaidau.dto.Item_hienthi_KQ;
+import com.example.fe_quanlygiaidau.dto.Join_hienthi_KQ;
 import com.example.fe_quanlygiaidau.model.DoiBong;
+import com.example.fe_quanlygiaidau.model.DoiBongGiaiDau;
 import com.example.fe_quanlygiaidau.model.Giaidau;
 import com.example.fe_quanlygiaidau.model.KetQuaTranDau;
 import com.example.fe_quanlygiaidau.model.TranDau;
@@ -54,98 +55,113 @@ public class Fragment_ket_qua extends Fragment {
         fetchKQTDFromApi();  // gọi API lấy dữ liệu
     }
 
+    private int totalApiCalls = 5;
+    private int loadedCount = 0;
+
+    private List<KetQuaTranDau> ketQuaList;
+    private List<TranDau> tranDauList;
+    private List<DoiBong> doiBongList;
+    private List<Giaidau> giaiDauList;
+    private List<DoiBongGiaiDau> doiBongGiaiDauList;
+
     private void fetchKQTDFromApi() {
+        loadedCount = 0;
+
         ApiService.apiService.getListKetQuaTranDau().enqueue(new Callback<List<KetQuaTranDau>>() {
             @Override
             public void onResponse(Call<List<KetQuaTranDau>> call, Response<List<KetQuaTranDau>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<KetQuaTranDau> ketQuaTranDauList = response.body();
-
-                    for (KetQuaTranDau kq : ketQuaTranDauList) {
-                        Log.d("KetQuaTranDau", "Số bàn đội 1: " + kq.getSoBanDoi1() + ", đội 2: " + kq.getSoBanDoi2());
-                    }
-
-                    ApiService.apiService.getListTranDau().enqueue(new Callback<List<TranDau>>() {
-                        @Override
-                        public void onResponse(Call<List<TranDau>> call, Response<List<TranDau>> response2) {
-                            if (response2.isSuccessful() && response2.body() != null) {
-                                List<TranDau> tranDauList = response2.body();
-
-                                for (TranDau td : tranDauList) {
-                                    Log.d("TranDau", "Mã đội 1: " + td.getMaDoi1() + ", mã đội 2: " + td.getMaDoi2());
-                                }
-
-                                ApiService.apiService.getListDoiBong().enqueue(new Callback<List<DoiBong>>() {
-                                    @Override
-                                    public void onResponse(Call<List<DoiBong>> call, Response<List<DoiBong>> response3) {
-                                        if (response3.isSuccessful() && response3.body() != null) {
-                                            List<DoiBong> doiBongList = response3.body();
-
-                                            for (DoiBong db : doiBongList) {
-                                                Log.d("DoiBong", "Tên: " + db.getTenDoiBong() + ", logo: " + db.getLogo() + ", quốc gia: " + db.getQuocGia());
-                                            }
-
-                                            ApiService.apiService.getListGiaiDau().enqueue(new Callback<List<Giaidau>>() {
-                                                @Override
-                                                public void onResponse(Call<List<Giaidau>> call, Response<List<Giaidau>> response4) {
-                                                    if (response4.isSuccessful() && response4.body() != null) {
-                                                        List<Giaidau> giaiDauList = response4.body();
-
-                                                        for (Giaidau gd : giaiDauList) {
-                                                            Log.d("GiaiDau", "Tên giải: " + gd.getTenGiaiDau() + ", ngày kết thúc: " + gd.getNgayKetThuc());
-                                                        }
-
-                                                        Join_hienthi_KQ joiner = new Join_hienthi_KQ();
-                                                        List<Item_hienthi_KQ> kq = joiner.mapKetQuaNhanh(
-                                                                ketQuaTranDauList, tranDauList, doiBongList, giaiDauList
-                                                        );
-
-                                                        adapter.setMatches(kq);
-                                                        adapter.notifyDataSetChanged();
-
-                                                        Toast.makeText(getContext(), "Có " + kq.size() + " kết quả", Toast.LENGTH_SHORT).show();
-                                                    } else {
-                                                        Log.e("API_ERROR", "getListGiaiDau trả về null hoặc lỗi.");
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onFailure(Call<List<Giaidau>> call, Throwable t) {
-                                                    Log.e("API_ERROR", "getListGiaiDau thất bại: " + t.getMessage(), t);
-                                                }
-                                            });
-
-                                        } else {
-                                            Log.e("API_ERROR", "getListDoiBong trả về null hoặc lỗi.");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<List<DoiBong>> call, Throwable t) {
-                                        Log.e("API_ERROR", "getListDoiBong thất bại: " + t.getMessage(), t);
-                                    }
-                                });
-
-                            } else {
-                                Log.e("API_ERROR", "getListTranDau trả về null hoặc lỗi.");
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<TranDau>> call, Throwable t) {
-                            Log.e("API_ERROR", "getListTranDau thất bại: " + t.getMessage(), t);
-                        }
-                    });
-
-                } else {
-                    Log.e("API_ERROR", "getListKetQuaTranDau trả về null hoặc lỗi.");
+                if (response.isSuccessful()) {
+                    ketQuaList = response.body();
                 }
+                onApiLoaded();
             }
 
             @Override
             public void onFailure(Call<List<KetQuaTranDau>> call, Throwable t) {
-                Log.e("API_ERROR", "getListKetQuaTranDau thất bại: " + t.getMessage(), t);
+                Log.e("API", "getListKetQuaTranDau fail", t);
+                onApiLoaded();
             }
         });
+
+        ApiService.apiService.getListTranDau().enqueue(new Callback<List<TranDau>>() {
+            @Override
+            public void onResponse(Call<List<TranDau>> call, Response<List<TranDau>> response) {
+                if (response.isSuccessful()) {
+                    tranDauList = response.body();
+                }
+                onApiLoaded();
+            }
+
+            @Override
+            public void onFailure(Call<List<TranDau>> call, Throwable t) {
+                Log.e("API", "getListTranDau fail", t);
+                onApiLoaded();
+            }
+        });
+
+        ApiService.apiService.getListDoiBong().enqueue(new Callback<List<DoiBong>>() {
+            @Override
+            public void onResponse(Call<List<DoiBong>> call, Response<List<DoiBong>> response) {
+                if (response.isSuccessful()) {
+                    doiBongList = response.body();
+                }
+                onApiLoaded();
+            }
+
+            @Override
+            public void onFailure(Call<List<DoiBong>> call, Throwable t) {
+                Log.e("API", "getListDoiBong fail", t);
+                onApiLoaded();
+            }
+        });
+
+        ApiService.apiService.getListGiaiDau().enqueue(new Callback<List<Giaidau>>() {
+            @Override
+            public void onResponse(Call<List<Giaidau>> call, Response<List<Giaidau>> response) {
+                if (response.isSuccessful()) {
+                    giaiDauList = response.body();
+                }
+                onApiLoaded();
+            }
+
+            @Override
+            public void onFailure(Call<List<Giaidau>> call, Throwable t) {
+                Log.e("API", "getListGiaiDau fail", t);
+                onApiLoaded();
+            }
+        });
+
+        ApiService.apiService.getListDoiBongGiaiDau().enqueue(new Callback<List<DoiBongGiaiDau>>() {
+            @Override
+            public void onResponse(Call<List<DoiBongGiaiDau>> call, Response<List<DoiBongGiaiDau>> response) {
+                if (response.isSuccessful()) {
+                    doiBongGiaiDauList = response.body();
+                }
+                onApiLoaded();
+            }
+
+            @Override
+            public void onFailure(Call<List<DoiBongGiaiDau>> call, Throwable t) {
+                Log.e("API", "getListDoiBongGiaiDau fail", t);
+                onApiLoaded();
+            }
+        });
+    }
+
+    private synchronized void onApiLoaded() {
+        loadedCount++;
+        if (loadedCount == totalApiCalls) {
+            if (ketQuaList != null && tranDauList != null && doiBongList != null && giaiDauList != null) {
+                Join_hienthi_KQ joiner = new Join_hienthi_KQ();
+                List<Item_hienthi_KQ> kq = joiner.mapKetQuaNhanh(
+                        ketQuaList, tranDauList, doiBongList, giaiDauList, doiBongGiaiDauList
+                );
+                adapter.setMatches(kq);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getContext(), "Có " + kq.size() + " kết quả", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Lỗi tải dữ liệu!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

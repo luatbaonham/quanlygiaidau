@@ -3,11 +3,11 @@ package com.example.fe_quanlygiaidau.model;
 import com.google.gson.annotations.SerializedName;
 
 public class TrongTaiTranDau {
-    @SerializedName("ma_tran_dau ")
+    @SerializedName("ma_tran_dau")
     private String maTrandau;
-    @SerializedName("ma_trong_tai ")
+    @SerializedName("ma_trong_tai")
     private String maTrongTai;
-    @SerializedName("ma_loai_trong_tai ")
+    @SerializedName("ma_loai_trong_tai")
     private String maLoaiTrongtai;
 
     public TrongTaiTranDau(String maTrandau, String maTrongTai, String maLoaiTrongtai) {
